@@ -62,6 +62,10 @@ Array.from(buttons).forEach((button) => {
             string += '/100';
             document.querySelector('input').value = string;
         }
+        else if (e.target.innerHTML === 'x!') {
+            string += 'factorial(';
+            document.querySelector('input').value = string;
+        }
         else {
             console.log(e.target);
             string += e.target.innerHTML;
@@ -70,18 +74,28 @@ Array.from(buttons).forEach((button) => {
     })
 })
 
-function evaluateExpression(expr) {
-  const modifiedExpr = expr.replace(/sin/g, 'Math.sin')
-                           .replace(/cos/g, 'Math.cos')
-                           .replace(/tan/g, 'Math.tan')
-                           .replace(/log/g, 'Math.log10')
-                           .replace(/ln/g, 'Math.log')
-                           .replace(/π/g, 'Math.PI')
-                           .replace(/√/g, 'Math.sqrt')
-                           .replace(/e/g, 'Math.E')
-                           .replace(/\^/g, '**');
-  return eval(modifiedExpr);
+function factorial(num) {
+    if (num === 0 || num === 1) {
+        return 1;
+    }
+    return num * factorial(num - 1);
 }
+
+
+function evaluateExpression(expr) {
+    const modifiedExpr = expr.replace(/sin/g, 'Math.sin')
+        .replace(/cos/g, 'Math.cos')
+        .replace(/tan/g, 'Math.tan')
+        .replace(/log/g, 'Math.log10')
+        .replace(/ln/g, 'Math.log')
+        .replace(/π/g, 'Math.PI')
+        .replace(/√/g, 'Math.sqrt')
+        .replace(/e/g, 'Math.E')
+        .replace(/\^/g, '**')
+        .replace(/factorial/g, 'factorial');
+    return eval(modifiedExpr);
+}
+
 
 
 
